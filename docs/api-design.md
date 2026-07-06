@@ -1,40 +1,42 @@
 # API Design
 
-## Create / update user (also stores user preferences)
-Endpoints: 
-POST /v1/users
-PUT  /v1/users/{user_id}
+## Create User
 
-Request:
+### Endpoint
+POST /api/v1/users
+
+### Request Payload
 {
-  "travel_style": {
-    "nature_vs_nightlife": 0.8,
-    "luxury_vs_budget": 0.3,
-    "pace": "relaxed"
-  },
-  "dietary_preferences": ["vegetarian"],
-  "mobility_constraints": ["no_long_hikes"],
-  "interests": ["history", "local food"]
+  "firstName": "Nameeta",
+  "lastName": "Limje",
+  "email": "nameeta@example.com"
 }
 
-## Create a trip
-Endpoint : POST /v1/trips
+### Create User Preferences
 
-Request:
+### Endpoint
+POST /v1/users/{userId}/preferences
+
+### Request Payload
 {
-  "destination": "Japan",
-  "start_date": "2026-03-10",
-  "end_date": "2026-03-20",
-  "travelers": 2,
-  "budget": "medium"
+  "travelStyle": [
+    "food",
+    "culture"
+  ],
+  "budget": "MEDIUM",
+  "tripDuration": 7,
+  "interests": [
+    "museums",
+    "local cuisine"
+  ]
 }
-
-Response:
-{ "trip_id": "trip_123" }
 
 ## Generate Personalized Itinerary
-Endpoint: POST /v1/itineraries
-Request:
+
+### Endpoint
+POST /v1/itineraries
+
+### Request Payload
 {
   "user_id": "user_42",
   "trip_id": "trip_123",
