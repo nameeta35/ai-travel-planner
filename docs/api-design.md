@@ -7,9 +7,9 @@ POST /api/v1/users
 
 ### Request Payload
 {
-  "firstName": "Nameeta",
-  "lastName": "Limje",
-  "email": "nameeta@example.com"
+  "firstName": "mikasa",
+  "lastName": "1234",
+  "email": "mikasa@example.com"
 }
 
 ### Create User Preferences

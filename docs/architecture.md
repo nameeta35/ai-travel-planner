@@ -1,36 +1,41 @@
 # AI-Travel-Planner Architecture
 
-                 Client
-                   |
-                   v
-          Spring Boot Travel API
-                   |
-                   |
-        +----------+-----------+
-        |                      |
-        v                      v
- Preference Service       Itinerary Service
-        |                      |
-        |                      |
-        +----------+-----------+
-                   |
-                   v
-          Python AI Orchestration Service
-                (Flask/FastAPI)
-                   |
-                   v
-              MCP Layer
-                   |
-        +----------+-----------+
-        |                      |
-        v                      v
-    LLM Provider          Travel Tools
-                         (APIs/MCP Servers)
-                              |
-              +---------------+---------------+
-              |               |               |
-           Weather        Maps           Restaurants
+## High-Level Architecture
 
+```mermaid
+flowchart LR
+    Client[Client Applications]
+
+    API[Spring Boot Travel API]
+
+    User[User Service]
+    Pref[Preference Service]
+    Trip[Itinerary Service]
+
+    AI[Python AI Orchestration Service]
+    MCP[MCP Tool Layer]
+
+    LLM[LLM Provider]
+
+    Weather[Weather API]
+    Maps[Maps API]
+    Places[Places API]
+
+    Client --> API
+
+    API --> User
+    API --> Pref
+    API --> Trip
+
+    Trip --> AI
+
+    AI --> MCP
+
+    MCP --> LLM
+    MCP --> Weather
+    MCP --> Maps
+    MCP --> Places
+```
 
 # Python AI Service Workflow
 1. Retrieve user preferences
