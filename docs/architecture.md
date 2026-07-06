@@ -1,21 +1,46 @@
 # AI-Travel-Planner Architecture
 
-  ├── User Service
-  ├── Trip Context Service
-  ├── Planning Orchestrator
-  │     ├── Context Builder
-  │     ├── Tool Router
-  │     └── LLM
-  └── Cache / In-memory store (Redis)
+                 Client
+                   |
+                   v
+          Spring Boot Travel API
+                   |
+                   |
+        +----------+-----------+
+        |                      |
+        v                      v
+ Preference Service       Itinerary Service
+        |                      |
+        |                      |
+        +----------+-----------+
+                   |
+                   v
+          Python AI Orchestration Service
+                (Flask/FastAPI)
+                   |
+                   v
+              MCP Layer
+                   |
+        +----------+-----------+
+        |                      |
+        v                      v
+    LLM Provider          Travel Tools
+                         (APIs/MCP Servers)
+                              |
+              +---------------+---------------+
+              |               |               |
+           Weather        Maps           Restaurants
 
-# System Workflow
-1. Fetch user profile (DB → Redis cache)
-2. Fetch trip context
-3. Enrich with external data
-   - Weather
-   - Seasonality
-   - Events
-4. Build planning prompt
+
+# Python AI Service Workflow
+1. Retrieve user preferences
+2. Select tools
+3. Call MCP servers
+4. Build context
 5. Call LLM
-6. Post-process output
-7. Return itinerary
+6. Return itinerary
+
+# MCP tools
+- get_weather(destination)
+- search_attractions(location)
+- find_restaurants(preferences)
